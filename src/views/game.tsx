@@ -27,6 +27,10 @@ function Game({ data }: DataProps) {
         let prevFrameTime = 0
         let accumulatedLagTime = 0
 
+        // Capping FPS
+        const targetFPS = 60
+        const frameDuration = 1000 / targetFPS
+
         // Offline Progress & Catchup
         if (ENGINE.OFFLINE_PROGRESS) {
             // Implement Offline Progress
@@ -46,6 +50,11 @@ function Game({ data }: DataProps) {
 
                 // Calculate Lag & Delta Time
                 const deltaMS = currentFrameTime - prevFrameTime
+
+                // Skip frame if it hasn't reached the target frame duration
+                if (deltaMS < frameDuration) return
+
+                // Calculate Delta Time
                 const deltaTime = Math.min(fixedUpdateRate, deltaMS / 1000)
                 accumulatedLagTime += deltaTime
                 lastSave += deltaTime
@@ -66,7 +75,7 @@ function Game({ data }: DataProps) {
                 }
 
                 // Set Frame Time
-                prevFrameTime = currentFrameTime
+                prevFrameTime = currentFrameTime - (deltaMS % frameDuration)
             } catch (err) {
                 stop()
                 throw err
