@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "noUnusedLocals": false,
+        "sourceMap": true,
+        "types": ["node", "webpack-env"],
+        "rootDir": ".",
+        "baseUrl": ".",
+        "paths": {
+            "@content": ["src/content/index"],
+            "@content/*": ["src/content/*"],
+            "@engine": ["src/engine/index"],
+            "@engine/*": ["src/engine/*"],
+            "@images/*": ["src/images/*"],
+            "@modules": ["src/modules/index"],
+            "@modules/*": ["src/modules/*"],
+            "@schemas/*": ["src/schemas/*"],
+            "@styles/*": ["src/styles/*"],
+            "@utils/*": ["src/utils/*"],
+            "@views/*": ["src/views/*"],
+            "@configs/*": ["src/configs/*"]
+        }
+    },
+    "include": ["src", "src/content/_items.ts"]
+}

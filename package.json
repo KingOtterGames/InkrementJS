@@ -1,0 +1,119 @@
+{
+    "name": "your-game-name",
+    "version": "9.30.2024.1",
+    "author": "Your Company Name",
+    "description": "React-TypeScript-Electron sample with Create React App and Electron Builder",
+    "homepage": ".",
+    "main": "build/electron/main.js",
+    "private": true,
+    "scripts": {
+        "start": "npm run version:full",
+        "start:demo": "npm run version:demo",
+        "rebuild": "electron-rebuild",
+        "version:full": "concurrently \"cross-env BROWSER=none npm run run:frontend\" \"set REACT_APP_DEMO=false && npm run run:electron\" -k",
+        "version:demo": "concurrently \"cross-env BROWSER=none npm run run:frontend\" \"set REACT_APP_DEMO=true && npm run run:electron\" -k",
+        "run:electron": "wait-on http://127.0.0.1:3000 && tsc -p electron && electron .",
+        "run:frontend": "craco start",
+        "package": "sh ./.automations/package.sh",
+        "package:clean": "rimraf ./build && rimraf ./dist",
+        "package:build:full": "set REACT_APP_DEMO=false && craco build && tsc -p electron",
+        "package:build:demo": "set REACT_APP_DEMO=true && craco build && tsc -p electron",
+        "package:pack": "electron-builder --dir"
+    },
+    "build": {
+        "asarUnpack": [
+            "**/build/electron/**/*"
+        ],
+        "extends": null,
+        "files": [
+            "!*.*",
+            "!**/*",
+            "node_modules/**/*",
+            "build/**/*"
+        ],
+        "directories": {
+            "buildResources": "assets"
+        }
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ],
+        "rules": {
+            "@typescript-eslint/no-unused-vars": "off"
+        }
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "dependencies": {
+        "dayjs": "^1.11.13",
+        "electron-reload": "^1.5.0",
+        "steamworks.js": "^0.0.26"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "@craco/craco": "^7.1.0",
+        "embla-carousel-react": "^7.1.0",
+        "recharts": "^2.12.7",
+        "@craco/types": "^7.1.0",
+        "@tabler/icons-react": "^3.19.0",
+        "@tiptap/extension-link": "^2.8.0",
+        "@tiptap/pm": "^2.8.0",
+        "@tiptap/react": "^2.8.0",
+        "@tiptap/starter-kit": "^2.8.0",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^14.4.3",
+        "@types/electron-devtools-installer": "^2.2.2",
+        "@types/jest": "^29.4.0",
+        "@types/lodash.clonedeep": "^4.5.9",
+        "@types/node": "^18.13.0",
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "@types/uuid": "^9.0.8",
+        "@types/webpack-env": "^1.18.5",
+        "concurrently": "^7.6.0",
+        "cpx": "^1.5.0",
+        "cross-env": "^7.0.3",
+        "electron": "^23.3.13",
+        "electron-builder": "^23.6.0",
+        "electron-rebuild": "^3.2.9",
+        "lodash.clonedeep": "^4.5.0",
+        "node-gyp": "^10.1.0",
+        "nodemon": "^3.1.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "seedrandom": "^3.0.5",
+        "type-fest": "^4.19.0",
+        "typescript": "^4.9.5",
+        "uuid": "^9.0.1",
+        "wait-on": "^7.0.1",
+        "web-vitals": "^3.1.1",
+        "@mantine/carousel": "^7.13.1",
+        "@mantine/charts": "^7.13.1",
+        "@mantine/code-highlight": "^7.13.1",
+        "@mantine/core": "^7.13.1",
+        "@mantine/dates": "^7.13.1",
+        "@mantine/dropzone": "^7.13.1",
+        "@mantine/form": "^7.13.1",
+        "@mantine/hooks": "^7.13.1",
+        "@mantine/modals": "^7.13.1",
+        "@mantine/notifications": "^7.13.1",
+        "@mantine/nprogress": "^7.13.1",
+        "@mantine/spotlight": "^7.13.1",
+        "@mantine/tiptap": "^7.13.1",
+        "@mantinex/mantine-logo": "^1.0.1"
+    }
+}
