@@ -1,6 +1,11 @@
-import * as Modules from '@modules'
 import { Action, Module, State } from './types'
 
+const modulesContext = require.context('../modules', true, /updates\.ts$/)
+const Modules: { [key: string]: any } = {}
+modulesContext.keys().forEach((key: string) => {
+    const moduleName = key.replace('./', '').replace('/updates.ts', '')
+    Modules[moduleName] = modulesContext(key)
+})
 const ModuleKeys = Object.keys(Modules)
 
 export const reducer = (state: State, action: Action<any>): State => {
