@@ -8,23 +8,23 @@ const engineeringFormatter = new Intl.NumberFormat('en-US', { notation: 'enginee
 // @ts-ignore
 const compactFormatter = new Intl.NumberFormat('en-US', { notation: 'compact', roundingMode: 'floor' })
 
-export const currency = (num: number): string => {
+const currency = (num: number): string => {
     return currencyFormatter.format(num)
 }
 
-export const whole = (num: number): string => {
+const whole = (num: number): string => {
     return wholeFormatter.format(num)
 }
 
-export const scientific = (num: number): string => {
+const scientific = (num: number): string => {
     return scientificFormatter.format(num).replace('E', 'e')
 }
 
-export const engineering = (num: number): string => {
+const engineering = (num: number): string => {
     return engineeringFormatter.format(num).replace('E', 'e')
 }
 
-export const standardCompact = (num: number): string => {
+const standardCompact = (num: number): string => {
     let regex = /^[a-zA-Z]+$/
     let compact = compactFormatter.format(num)
     let lastChar = compact[compact.length - 1]
@@ -161,7 +161,7 @@ var FormatList = [
     'NNn',
     'Ce',
 ]
-export const standard = (num: number, places: number = 3): string => {
+const standard = (num: number, places: number = 3): string => {
     let matissa = num / Math.pow(10, Math.floor(Math.log10(num)))
     let power = Math.floor(Math.log10(num))
 
@@ -175,7 +175,7 @@ export const standard = (num: number, places: number = 3): string => {
     else return matissa + ' ' + getAbbreviation(power)
 }
 
-export const timeLong = (s: number) => {
+const timeLong = (s: number) => {
     if (s >= 31536000) {
         return (
             Math.floor(s / 31536000) +
@@ -212,6 +212,19 @@ const preformat = (int: number) => {
     else return int
 }
 
-export const timeShort = (s: number) => {
+const timeShort = (s: number) => {
     return preformat(Math.floor(s / 3600)) + ':' + preformat(Math.floor((s % 3600) / 60)) + ':' + preformat(Math.floor(s % 60))
 }
+
+const Numbers = {
+    currency,
+    whole,
+    scientific,
+    engineering,
+    standardCompact,
+    standard,
+    timeLong,
+    timeShort,
+}
+
+export default Numbers

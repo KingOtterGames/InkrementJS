@@ -1,4 +1,4 @@
-import { State } from '@schemas/state'
+import { State } from '@engine/types'
 
 /**
  * Checks if they have the achievement

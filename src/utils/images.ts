@@ -1,3 +1,4 @@
+// @ts-nocheck
 function importAll(r: any) {
     let images = {}
     r.keys().forEach((item: string) => {
@@ -6,8 +7,14 @@ function importAll(r: any) {
     return images
 }
 
-const images = importAll(require.context('../../images/', true))
+const images = importAll(require.context('../content/images/', true))
 
-export const get = (key: string) => {
+const get = (key: string) => {
     return (images as any)[key]
 }
+
+const Images = {
+    get,
+}
+
+export default Images

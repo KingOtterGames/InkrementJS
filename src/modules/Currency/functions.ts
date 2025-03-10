@@ -1,7 +1,7 @@
-import { State } from '@schemas/state'
+import { State } from '@engine/types'
 
 /**
- * Sets the Tab for the Player
+ * Add
  */
 export type AddPayload = {
     currency: string
@@ -14,7 +14,7 @@ export const add = (state: State, payload: AddPayload): State => {
 }
 
 /**
- * Sets the Tab for the Player
+ * Remove
  */
 export type RemovePayload = {
     currency: string

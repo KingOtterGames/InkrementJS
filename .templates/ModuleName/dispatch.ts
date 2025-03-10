@@ -1,14 +1,18 @@
 // @ts-nocheck
-import { Action } from '@schemas/engine'
-import * as Engine from './functions'
+import { Action } from '@engine/types'
+import * as Functions from './functions'
 
-export const tab = (dispatch: React.Dispatch<Action>, id: string) => {
-    const payload: Engine.TabPayload = {
-        tab: id,
-    }
+export const example = (dispatch: React.Dispatch<Action>) => {
+    const payload: Functions.ExamplePayload = {}
 
     dispatch({
-        func: Engine.tab,
+        action: Functions.example,
         payload,
     })
 }
+
+const Example = {
+    example,
+}
+
+export default Example

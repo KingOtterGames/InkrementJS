@@ -1,7 +1,7 @@
-import { State } from '@schemas/state'
+import { State } from '@engine/types'
 
 /**
- * Sets the Tab for the Player
+ * Tab
  */
 export type TabPayload = {
     tab: string
@@ -13,13 +13,13 @@ export const tab = (state: State, payload: TabPayload): State => {
 }
 
 /**
- * Sets the Sub Tab for the Player
+ * Subtab
  */
 export type SubtabPayload = {
     subtab: string
 }
 
-export const subtab = (state: State, payload: SubtabPayload): State => {
+export const subtab = (state: State, payload: { subtab: string }): State => {
     state.subtab = payload.subtab
     return state
 }

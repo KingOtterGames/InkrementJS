@@ -1,26 +1,29 @@
-import { Action } from '@schemas/engine'
-import * as Currency from './functions'
+import { Action } from '@engine/types'
+import * as Functions from './functions'
 
-export const add = (dispatch: React.Dispatch<Action>, currency: string, amount: number) => {
-    const payload: Currency.AddPayload = {
-        currency: currency,
-        amount: amount,
-    }
-
+const add = (dispatch: React.Dispatch<Action<Functions.AddPayload>>, currency: string, amount: number) => {
     dispatch({
-        func: Currency.add,
-        payload,
+        action: Functions.add,
+        payload: {
+            currency: currency,
+            amount: amount,
+        },
     })
 }
 
-export const remove = (dispatch: React.Dispatch<Action>, currency: string, amount: number) => {
-    const payload: Currency.RemovePayload = {
-        currency: currency,
-        amount: amount,
-    }
-
+const remove = (dispatch: React.Dispatch<Action<Functions.RemovePayload>>, currency: string, amount: number) => {
     dispatch({
-        func: Currency.remove,
-        payload,
+        action: Functions.remove,
+        payload: {
+            currency: currency,
+            amount: amount,
+        },
     })
 }
+
+const Currency = {
+    add,
+    remove,
+}
+
+export default Currency

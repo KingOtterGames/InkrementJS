@@ -22,17 +22,18 @@
         "baseUrl": ".",
         "paths": {
             "@content": ["src/content/index"],
-            "@content/*": ["src/content/*"],
             "@engine": ["src/engine/index"],
             "@engine/*": ["src/engine/*"],
-            "@images/*": ["src/images/*"],
+            "@images/*": ["src/content/images/*"],
+            "@sounds/*": ["src/content/sounds/*"],
+            "@data/*": ["src/content/data/*"],
             "@modules": ["src/modules/index"],
             "@modules/*": ["src/modules/*"],
             "@schemas/*": ["src/schemas/*"],
-            "@styles/*": ["src/styles/*"],
             "@utils/*": ["src/utils/*"],
-            "@views/*": ["src/views/*"],
-            "@configs/*": ["src/configs/*"]
+            "@pages/*": ["src/views/pages/*"],
+            "@components/*": ["src/views/components/*"],
+            "@configs/*": ["src/content/configs/*"]
         }
     },
     "include": ["src", "src/content/_items.ts"]

@@ -1,6 +1,6 @@
 import * as PreviousVersion from './v0'
 
-export type State = {
+export type StateV1 = {
     version: number
     tab: string
     subtab: string
@@ -11,7 +11,7 @@ export type State = {
     achievements: string[]
 }
 
-export const DefaultSave: State = {
+export const DefaultSave: StateV1 = {
     version: 1,
     tab: '',
     subtab: '',
@@ -21,7 +21,7 @@ export const DefaultSave: State = {
     achievements: [],
 }
 
-export const convertPreviousVersion = (v0: PreviousVersion.State): State => {
+export const convertPreviousVersion = (v0: PreviousVersion.State): StateV1 => {
     return {
         version: DefaultSave.version,
         tab: DefaultSave.tab,

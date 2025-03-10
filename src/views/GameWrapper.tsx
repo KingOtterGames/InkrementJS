@@ -1,25 +1,31 @@
-import { useEffect, useReducer } from 'react'
-import * as Core from '@engine'
-import * as ENGINE from '@configs/engine'
-import * as INFO from '@configs/info'
-import { State } from '@schemas/state'
-import { Navbar } from './navbar'
+import { useEffect, useReducer, useState } from 'react'
+import GlobalConfig from '@configs/global'
+import Dispatcher from '@engine/dispatcher'
+import Saves, { DEFAULT_SAVE } from '@engine/saves'
+import Layout from './Layout'
 
-type DataProps = {
-    data: State
-}
-
-function Game({ data }: DataProps) {
-    const [state, dispatch] = useReducer(Core.Dispatcher.reducer, data)
+function GameWrapper() {
+    const [state, dispatch] = useReducer(Dispatcher.reducer, DEFAULT_SAVE)
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        document.title = INFO.PROJECT_NAME + ' - ' + state.tab
-    }, [state.tab])
+        document.title = `${GlobalConfig.PROJECT_INFO.TITLE}`
+
+        const loadingState = async () => {
+            const initialState = await Saves.load()
+            dispatch({ action: () => initialState, payload: {} })
+            setLoaded(true)
+        }
+        loadingState()
+    }, [])
 
     /**
      * Gameplay Loop
      */
     useEffect(() => {
+        // Skip if not Loaded yet
+        if (!loaded) return
+
         // Required Variables and Tracking
         const fixedUpdateInSeconds = 1
         const fixedUpdateRate = 1 / fixedUpdateInSeconds
@@ -32,7 +38,7 @@ function Game({ data }: DataProps) {
         const frameDuration = 1000 / targetFPS
 
         // Offline Progress & Catchup
-        if (ENGINE.OFFLINE_PROGRESS) {
+        if (GlobalConfig.OFFLINE_PROGRESS.ENABLED) {
             // Implement Offline Progress
         }
 
@@ -62,15 +68,15 @@ function Game({ data }: DataProps) {
                 // Handle onFixedUpdate Logic
                 while (accumulatedLagTime >= fixedUpdateRate) {
                     accumulatedLagTime -= fixedUpdateRate
-                    Core.Dispatcher.fixedUpdate(dispatch, deltaTime)
+                    Dispatcher.fixedUpdate(dispatch, deltaTime)
                 }
 
                 // Handle onUpdate Logic
-                Core.Dispatcher.update(dispatch, deltaTime)
+                Dispatcher.update(dispatch, deltaTime)
 
                 // Check if save is needed
-                if (lastSave >= ENGINE.AUTO_SAVE_TIMER_MINUTES * 60) {
-                    Core.Saves.save(state)
+                if (lastSave >= GlobalConfig.SAVING.AUTO_SAVE_TIMER_MINUTES * 60) {
+                    Saves.save(state)
                     lastSave = 0
                 }
 
@@ -86,14 +92,17 @@ function Game({ data }: DataProps) {
 
         return stop
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [loaded])
 
     /**
      * Save on Reload & Safe Exit
      */
     useEffect(() => {
+        // Skip if not Loaded yet
+        if (!loaded) return
+
         const handler = () => {
-            Core.Saves.save(state)
+            Saves.save(state)
         }
 
         window.addEventListener('beforeunload', handler)
@@ -102,13 +111,15 @@ function Game({ data }: DataProps) {
             window.removeEventListener('beforeunload', handler)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state])
+    }, [state, loaded])
+
+    if (!loaded) return <div>Loading...</div>
 
     return (
         <div>
-            <Navbar state={state} dispatch={dispatch} />
+            <Layout state={state} dispatch={dispatch} />
         </div>
     )
 }
 
-export default Game
+export default GameWrapper

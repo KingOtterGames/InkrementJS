@@ -1,10 +1,14 @@
-import { State } from '@schemas/state'
-import { DEFAULT_SAVE } from 'src/configs/state'
-
 import cloneDeep from 'lodash.clonedeep'
-
 import * as V0 from './versions/v0'
 import * as V1 from './versions/v1'
+import { State } from './types'
+
+/**
+ * Data to Update when a new version is released
+ */
+export const CURRENT_VERSION = V1
+export const DEFAULT_SAVE: State = CURRENT_VERSION.DefaultSave
+export type DEFAULT_SAVE_TYPE = V1.StateV1
 
 export const load = (): Promise<State> => {
     return new Promise<State>((res, rej) => {
@@ -56,3 +60,11 @@ export const version = (json: State): State => {
 
     return state
 }
+
+const Saves = {
+    load,
+    save,
+    remove,
+}
+
+export default Saves

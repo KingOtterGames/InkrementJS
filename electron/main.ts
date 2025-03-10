@@ -30,7 +30,6 @@ try {
 app.commandLine.appendSwitch('in-process-gpu')
 app.commandLine.appendSwitch('disable-direct-composition')
 app.commandLine.appendSwitch('disable-renderer-backgrounding')
-app.commandLine.appendSwitch('disable-audio-output')
 app.commandLine.appendSwitch('disable-background-timer-throttling')
 app.commandLine.appendSwitch('disable-accelerated-2d-canvas')
 app.commandLine.appendSwitch('disable-accelerated-mjpeg-decode')
@@ -43,6 +42,7 @@ app.commandLine.appendSwitch('disable-accelerated-video-encode')
 //app.commandLine.appendSwitch('disable-gpu-compositing')
 //app.commandLine.appendSwitch('disable-gpu')
 //app.disableHardwareAcceleration()
+//app.commandLine.appendSwitch('disable-audio-output')
 
 /**
  * Connect to Steamworks

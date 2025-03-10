@@ -1,7 +1,7 @@
-import { State } from '@schemas/state'
+import { State } from '@engine/types'
 
 /**
- * Awards an achievement to a player if they haven't earned it yet
+ * Give
  */
 export type GivePayload = {
     id: string

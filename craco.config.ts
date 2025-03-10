@@ -3,15 +3,16 @@ import path from 'path'
 const config = {
     webpack: {
         alias: {
-            '@content': path.resolve(__dirname, 'src/content'),
             '@engine': path.resolve(__dirname, 'src/engine'),
-            '@images': path.resolve(__dirname, 'src/images'),
+            '@images': path.resolve(__dirname, 'src/content/images'),
+            '@sounds': path.resolve(__dirname, 'src/content/sounds'),
+            '@data': path.resolve(__dirname, 'src/content/data'),
             '@modules': path.resolve(__dirname, 'src/modules'),
             '@schemas': path.resolve(__dirname, 'src/schemas'),
-            '@styles': path.resolve(__dirname, 'src/styles'),
             '@utils': path.resolve(__dirname, 'src/utils'),
-            '@views': path.resolve(__dirname, 'src/views'),
-            '@configs': path.resolve(__dirname, 'src/configs'),
+            '@pages': path.resolve(__dirname, 'src/views/pages'),
+            '@components': path.resolve(__dirname, 'src/views/components'),
+            '@configs': path.resolve(__dirname, 'src/content/configs'),
         },
     },
 }

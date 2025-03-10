@@ -1,14 +1,11 @@
 // @ts-nocheck
-import { State } from '@schemas/state'
+import { State } from '@engine/types'
 
 /**
  * Sets the Tab for the Player
  */
-export type TabPayload = {
-    tab: string
-}
+export type ExamplePayload = {}
 
-export const tab = (state: State, payload: TabPayload): State => {
-    state.tab = payload.tab
+export const example = (state: State, payload: ExamplePayload): State => {
     return state
 }

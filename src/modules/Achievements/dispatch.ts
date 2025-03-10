@@ -1,13 +1,17 @@
-import { Action } from '@schemas/engine'
-import * as Achievements from './functions'
+import { Action } from '@engine/types'
+import * as Functions from './functions'
 
-export const give = (dispatch: React.Dispatch<Action>, id: string) => {
-    const payload: Achievements.GivePayload = {
-        id,
-    }
-
+export const give = (dispatch: React.Dispatch<Action<Functions.GivePayload>>, id: string) => {
     dispatch({
-        func: Achievements.give,
-        payload,
+        action: Functions.give,
+        payload: {
+            id,
+        },
     })
 }
+
+const Achievements = {
+    give,
+}
+
+export default Achievements

@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom/client'
-import App from './app'
 import Steam from '@engine/steam'
 import { createTheme, MantineProvider } from '@mantine/core'
 
@@ -7,8 +6,8 @@ import { createTheme, MantineProvider } from '@mantine/core'
  * Styles
  */
 import '@mantine/core/styles.css'
-import '@styles/global.css'
-import '@styles/navbar.css'
+import './index.css'
+import GameWrapper from './views/GameWrapper'
 
 const theme = createTheme({
     /** Put your mantine theme override here */
@@ -31,7 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     <>
         <MantineProvider theme={theme} defaultColorScheme="dark">
-            <App />
+            <GameWrapper />
             <Steam />
         </MantineProvider>
     </>
