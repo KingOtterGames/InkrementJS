@@ -23,7 +23,7 @@ InkrementJS is an incremental/simulation-based game framework built with Electro
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/your-username/InkrementJS.git
+    git clone https://github.com/KingOtterGames/InkrementJS.git
     cd InkrementJS
     ```
 
